@@ -1,3 +1,8 @@
+# Marketplace Backend
+
+File structure:
+
+```plaintext
 ├── MarketplaceApplication
 │
 ├── config
