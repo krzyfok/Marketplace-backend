@@ -1,6 +1,7 @@
 package com.example.marketplace.auth.domain;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -16,28 +17,24 @@ public class AuthUser {
     private String username;
 
     @Column(nullable = false, unique = false)
-    private String name;
-
-    @Column(nullable = false, unique = false)
-    private String surname;
-
-    @Column(nullable = false, unique = false)
     private String email;
 
     @Column(nullable = false, unique = false)
     private String password;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column
+    private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime lastloginAt;
 
     public AuthUser() {}
 
-    public AuthUser(String username, LocalDateTime createdAt, String password, String email, String surname, String name) {
+    public AuthUser(String username, String email, String password) {
         this.username = username;
-        this.createdAt = createdAt;
-        this.password = password;
         this.email = email;
-        this.surname = surname;
-        this.name = name;
+        this.password = password;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -48,21 +45,6 @@ public class AuthUser {
         this.id = id;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
@@ -90,6 +72,14 @@ public class AuthUser {
 
     public String getPassword() {
         return password;
+    }
+
+    public LocalDateTime getLastloginAt() {
+        return lastloginAt;
+    }
+
+    public void setLastloginAt(LocalDateTime lastloginAt) {
+        this.lastloginAt = lastloginAt;
     }
 
     public void setPassword(String password) {

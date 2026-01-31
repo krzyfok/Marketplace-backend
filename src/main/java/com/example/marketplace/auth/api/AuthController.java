@@ -4,6 +4,7 @@ package com.example.marketplace.auth.api;
 import com.example.marketplace.auth.dto.LoginRequest;
 import com.example.marketplace.auth.dto.LoginResponse;
 import com.example.marketplace.auth.dto.RegisterRequest;
+import com.example.marketplace.auth.dto.RegisterResponse;
 import com.example.marketplace.auth.service.AuthService;
 import org.apache.juli.logging.Log;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +24,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        authService.register(request);
-        return ResponseEntity.ok("User registered");
+    public RegisterResponse register(@RequestBody RegisterRequest request) {
+        return authService.register(request);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        String token = authService.login(request);
-        return ResponseEntity.ok(new LoginResponse(token));
+    public LoginResponse login(@RequestBody LoginRequest request) {
+        return authService.login(request);
+
     }
 }
