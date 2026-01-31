@@ -1,5 +1,5 @@
 # Marketplace Backend
-
+Backend application for a marketplace platform built with Spring Boot.
 ## Backend Stack
 
 - Java 21 (Oracle OpenJDK)
