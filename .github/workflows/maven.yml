@@ -34,15 +34,12 @@ jobs:
           echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
           echo "DB_PASS=${{ secrets.DB_PASS }}" >> $GITHUB_ENV
           echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
-    - name: Build JAR
-      run: mvn clean package -DskipTests -B
+    - name: Build and run tests
+      run: mvn clean verify -B
     
     - name: Upload JAR
       uses: actions/upload-artifact@v4
       with:
         name: springboot-jar
         path: target/*.jar
-    
-    - name: Run tests (optional)
-      run: mvn test -B || echo "Tests failed, but continue workflow"
 
