@@ -1,5 +1,6 @@
 package com.example.marketplace.auth.domain;
 
+
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
@@ -22,6 +23,10 @@ public class AuthUser {
     @Column(nullable = false, unique = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AuthUserRole role;
+
     @Column
     private LocalDateTime createdAt;
 
@@ -30,11 +35,12 @@ public class AuthUser {
 
     public AuthUser() {}
 
-    public AuthUser(String username, String email, String password) {
+    public AuthUser(String username, String email, String password, AuthUserRole role) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.createdAt = LocalDateTime.now();
+        this.role = role;
     }
 
     public Long getId() {
