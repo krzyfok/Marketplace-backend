@@ -3,6 +3,7 @@ package com.example.marketplace.auth;
 
 
 import com.example.marketplace.auth.domain.AuthUser;
+import com.example.marketplace.auth.domain.AuthUserRole;
 import com.example.marketplace.auth.dto.LoginRequest;
 import com.example.marketplace.auth.dto.LoginResponse;
 import com.example.marketplace.auth.dto.RegisterRequest;
@@ -74,7 +75,7 @@ class AuthServiceTest {
 
     @Test
     void login_shouldReturnTokenIfPasswordMatches() {
-        AuthUser authUser = new AuthUser("john", "john@example.com", "hashed");
+        AuthUser authUser = new AuthUser("john", "john@example.com", "hashed", AuthUserRole.USER);
         when(authUserRepo.findByUsername("john")).thenReturn(Optional.of(authUser));
         when(passwordEncoder.matches("secret", "hashed")).thenReturn(true);
         when(jwtProvider.generateToken(authUser)).thenReturn("fake-jwt");
@@ -103,7 +104,7 @@ class AuthServiceTest {
 
     @Test
     void login_shouldThrowExceptionIfPasswordInvalid() {
-        AuthUser authUser = new AuthUser("john", "john@example.com", "hashed");
+        AuthUser authUser = new AuthUser("john", "john@example.com", "hashed",AuthUserRole.USER);
         when(authUserRepo.findByUsername("john")).thenReturn(Optional.of(authUser));
         when(passwordEncoder.matches("wrong", "hashed")).thenReturn(false);
 
