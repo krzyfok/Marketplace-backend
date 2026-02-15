@@ -3,6 +3,8 @@ package com.example.marketplace.Product.api;
 import com.example.marketplace.Product.dto.NewProductRequest;
 import com.example.marketplace.Product.dto.NewProductResponse;
 import com.example.marketplace.Product.service.ProductService;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,14 @@ public class ProductController {
     }
 
     @PostMapping
-    public NewProductResponse create(@RequestBody NewProductRequest request)
+    public ResponseEntity<NewProductResponse> create(@RequestBody NewProductRequest request)
     {
-        return productService.createProduct(request);
+        try {
+            return ResponseEntity.ok(productService.createProduct(request));
+        }catch (DataIntegrityViolationException e)
+        {
+            return  ResponseEntity.badRequest().body(new NewProductResponse(1));
+        }
     }
 
 }
