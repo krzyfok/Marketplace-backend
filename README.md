@@ -9,3 +9,6 @@ Backend application for a marketplace platform built with Spring Boot.
 - **Persistence:** Spring Data JPA, MySQL Connector/J
 - **Build Tool:** Maven (spring-boot-maven-plugin)
 
+# API Documentation
+
+[![Swagger UI](https://img.shields.io/badge/Swagger-UI-blue)](https://krzyfok.github.io/Marketplace-backend/)
