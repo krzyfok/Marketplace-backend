@@ -38,4 +38,8 @@ public class AuthUser {
     @Column
     private LocalDateTime lastloginAt;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

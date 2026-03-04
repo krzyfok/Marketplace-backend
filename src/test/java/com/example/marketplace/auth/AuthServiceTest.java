@@ -52,7 +52,16 @@ class AuthServiceTest {
         request.setName("John");
         request.setSurname("Doe");
 
-        when(passwordEncoder.encode("secret")).thenReturn("hashedSecret");
+        when(authUserMapper.mapFromRegisterRequestDtotoAuthUser(any(RegisterRequestDto.class)))
+                .thenAnswer(invocation -> {
+                    RegisterRequestDto req = invocation.getArgument(0);
+                    return AuthUser.builder()
+                            .username(req.getUsername())
+                            .email(req.getEmail())
+                            .password("hashedSecret")
+                            .role(AuthUserRole.USER)
+                            .build();
+                });
         when(jwtProvider.generateToken(any(AuthUser.class))).thenReturn("fake-jwt");
 
         RegisterResponseDto response = authService.register(request);
