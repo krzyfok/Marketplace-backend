@@ -1,9 +1,9 @@
 package com.example.marketplace.auth.dto;
 
-public class RegisterResponse {
+public class LoginResponseDto {
     private String token;
 
-    public RegisterResponse(String token) {
+    public LoginResponseDto(String token) {
         this.token = token;
     }
 

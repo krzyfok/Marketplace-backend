@@ -1,6 +1,6 @@
 package com.example.marketplace.auth.dto;
 
-public class RegisterRequest {
+public class RegisterRequestDto {
     private String username;
     private String password;
     private String name;

@@ -2,12 +2,13 @@ package com.example.marketplace.auth.service;
 
 import com.example.marketplace.auth.domain.AuthUser;
 import com.example.marketplace.auth.domain.AuthUserRole;
-import com.example.marketplace.auth.dto.LoginRequest;
-import com.example.marketplace.auth.dto.LoginResponse;
-import com.example.marketplace.auth.dto.RegisterRequest;
-import com.example.marketplace.auth.dto.RegisterResponse;
+import com.example.marketplace.auth.dto.LoginRequestDto;
+import com.example.marketplace.auth.dto.LoginResponseDto;
+import com.example.marketplace.auth.dto.RegisterRequestDto;
+import com.example.marketplace.auth.dto.RegisterResponseDto;
 import com.example.marketplace.auth.infrastructure.AuthUserRepository;
 import com.example.marketplace.auth.infrastructure.JwtTokenProvider;
+import com.example.marketplace.auth.mapper.AuthUserMapper;
 import com.example.marketplace.user.domain.User;
 import com.example.marketplace.user.infrastructure.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,34 +23,36 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtProvider;
+    private final AuthUserMapper authUserMapper;
 
-    public AuthService(AuthUserRepository authUserRepo,UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtProvider) {
+    public AuthService(AuthUserRepository authUserRepo,UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtProvider, AuthUserMapper authUserMapper) {
         this.authUserRepo = authUserRepo;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
+        this.authUserMapper =authUserMapper;
     }
 
     @Transactional
-    public RegisterResponse register(RegisterRequest request) {
-        AuthUser authUser = new AuthUser(request.getUsername(),request.getEmail(),passwordEncoder.encode(request.getPassword()), AuthUserRole.USER);
+    public RegisterResponseDto register(RegisterRequestDto request) {
+        AuthUser authUser = authUserMapper.mapFromRegisterRequestDtotoAuthUser(request);
         authUserRepo.save(authUser);
 
         User user = new User(authUser,request.getName(),request.getSurname());
         userRepository.save(user);
 
-        return new RegisterResponse(jwtProvider.generateToken(authUser));
+        return new RegisterResponseDto(jwtProvider.generateToken(authUser));
 
     }
     @Transactional
-    public LoginResponse login(LoginRequest request) {
+    public LoginResponseDto login(LoginRequestDto request) {
         AuthUser user = authUserRepo.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
         user.setLastloginAt(LocalDateTime.now());
-        return  new LoginResponse(jwtProvider.generateToken(user));
+        return  new LoginResponseDto(jwtProvider.generateToken(user));
     }
 
 }

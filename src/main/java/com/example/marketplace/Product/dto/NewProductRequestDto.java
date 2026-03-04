@@ -3,7 +3,7 @@ package com.example.marketplace.Product.dto;
 
 import com.example.marketplace.Product.domain.ProductCategory;
 
-public class NewProductRequest {
+public class NewProductRequestDto {
 
 
     private String name;

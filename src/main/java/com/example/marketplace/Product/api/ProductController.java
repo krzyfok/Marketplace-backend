@@ -1,7 +1,7 @@
 package com.example.marketplace.Product.api;
 
-import com.example.marketplace.Product.dto.NewProductRequest;
-import com.example.marketplace.Product.dto.NewProductResponse;
+import com.example.marketplace.Product.dto.NewProductRequestDto;
+import com.example.marketplace.Product.dto.NewProductResponseDto;
 import com.example.marketplace.Product.service.ProductService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +20,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<NewProductResponse> create(@RequestBody NewProductRequest request)
+    public ResponseEntity<NewProductResponseDto> create(@RequestBody NewProductRequestDto request)
     {
         try {
             return ResponseEntity.ok(productService.createProduct(request));
         }catch (DataIntegrityViolationException e)
         {
-            return  ResponseEntity.badRequest().body(new NewProductResponse(1));
+            return  ResponseEntity.badRequest().body(new NewProductResponseDto(1));
         }
     }
 

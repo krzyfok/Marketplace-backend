@@ -4,19 +4,19 @@ package com.example.marketplace.auth;
 
 import com.example.marketplace.auth.domain.AuthUser;
 import com.example.marketplace.auth.domain.AuthUserRole;
-import com.example.marketplace.auth.dto.LoginRequest;
-import com.example.marketplace.auth.dto.LoginResponse;
-import com.example.marketplace.auth.dto.RegisterRequest;
-import com.example.marketplace.auth.dto.RegisterResponse;
+import com.example.marketplace.auth.dto.LoginRequestDto;
+import com.example.marketplace.auth.dto.LoginResponseDto;
+import com.example.marketplace.auth.dto.RegisterRequestDto;
+import com.example.marketplace.auth.dto.RegisterResponseDto;
 import com.example.marketplace.auth.infrastructure.AuthUserRepository;
 import com.example.marketplace.auth.infrastructure.JwtTokenProvider;
+import com.example.marketplace.auth.mapper.AuthUserMapper;
 import com.example.marketplace.auth.service.AuthService;
 import com.example.marketplace.user.domain.User;
 import com.example.marketplace.user.infrastructure.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -31,6 +31,7 @@ class AuthServiceTest {
     private PasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtProvider;
     private AuthService authService;
+    private AuthUserMapper authUserMapper;
 
     @BeforeEach
     void setUp() {
@@ -38,12 +39,13 @@ class AuthServiceTest {
         userRepository = mock(UserRepository.class);
         passwordEncoder = mock(PasswordEncoder.class);
         jwtProvider = mock(JwtTokenProvider.class);
-        authService = new AuthService(authUserRepo, userRepository, passwordEncoder, jwtProvider);
+        authUserMapper = mock(AuthUserMapper.class);
+        authService = new AuthService(authUserRepo, userRepository, passwordEncoder, jwtProvider, authUserMapper);
     }
 
     @Test
     void register_shouldSaveAuthUserAndUserAndReturnToken() {
-        RegisterRequest request = new RegisterRequest();
+        RegisterRequestDto request = new RegisterRequestDto();
         request.setUsername("john");
         request.setEmail("john@example.com");
         request.setPassword("secret");
@@ -53,7 +55,7 @@ class AuthServiceTest {
         when(passwordEncoder.encode("secret")).thenReturn("hashedSecret");
         when(jwtProvider.generateToken(any(AuthUser.class))).thenReturn("fake-jwt");
 
-        RegisterResponse response = authService.register(request);
+        RegisterResponseDto response = authService.register(request);
 
 
         ArgumentCaptor<AuthUser> authUserCaptor = ArgumentCaptor.forClass(AuthUser.class);
@@ -75,16 +77,21 @@ class AuthServiceTest {
 
     @Test
     void login_shouldReturnTokenIfPasswordMatches() {
-        AuthUser authUser = new AuthUser("john", "john@example.com", "hashed", AuthUserRole.USER);
+        AuthUser authUser = AuthUser.builder()
+                .username("john")
+                .email("john@example.com")
+                .password("hashed")
+                .role(AuthUserRole.USER)
+                .build();
         when(authUserRepo.findByUsername("john")).thenReturn(Optional.of(authUser));
         when(passwordEncoder.matches("secret", "hashed")).thenReturn(true);
         when(jwtProvider.generateToken(authUser)).thenReturn("fake-jwt");
 
-        LoginRequest request = new LoginRequest();
+        LoginRequestDto request = new LoginRequestDto();
         request.setUsername("john");
         request.setPassword("secret");
 
-        LoginResponse response = authService.login(request);
+        LoginResponseDto response = authService.login(request);
 
         assertEquals("fake-jwt", response.getToken());
         assertNotNull(authUser.getLastloginAt());
@@ -94,7 +101,7 @@ class AuthServiceTest {
     void login_shouldThrowExceptionIfUserNotFound() {
         when(authUserRepo.findByUsername("unknown")).thenReturn(Optional.empty());
 
-        LoginRequest request = new LoginRequest();
+        LoginRequestDto request = new LoginRequestDto();
         request.setUsername("unknown");
         request.setPassword("secret");
 
@@ -104,11 +111,16 @@ class AuthServiceTest {
 
     @Test
     void login_shouldThrowExceptionIfPasswordInvalid() {
-        AuthUser authUser = new AuthUser("john", "john@example.com", "hashed",AuthUserRole.USER);
+        AuthUser authUser = AuthUser.builder()
+                .username("john")
+                .email("john@example.com")
+                .password("hashed")
+                .role(AuthUserRole.USER)
+                .build();
         when(authUserRepo.findByUsername("john")).thenReturn(Optional.of(authUser));
         when(passwordEncoder.matches("wrong", "hashed")).thenReturn(false);
 
-        LoginRequest request = new LoginRequest();
+        LoginRequestDto request = new LoginRequestDto();
         request.setUsername("john");
         request.setPassword("wrong");
 

@@ -1,13 +1,13 @@
 package com.example.marketplace.Product.dto;
 
-public class NewProductResponse {
+public class NewProductResponseDto {
     private int returnCode;
 
     public int getReturnCode() {
         return returnCode;
     }
 
-    public NewProductResponse(int returnCode) {
+    public NewProductResponseDto(int returnCode) {
         this.returnCode = returnCode;
     }
 
