@@ -9,6 +9,15 @@ Backend application for a marketplace platform built with Spring Boot.
 - **Persistence:** Spring Data JPA, MySQL Connector/J
 - **Build Tool:** Maven (spring-boot-maven-plugin)
 
+## Running the MySQL Database
+
+
+
+In the root of the project, there is a `docker-compose.yml` file. To start the database, run:
+
+```bash
+docker-compose up -d mysql-db
+```
 # API Documentation
 
 [![Swagger UI](https://img.shields.io/badge/Swagger-UI-blue?style=for-the-badge&logo=swagger&logoColor=white&labelColor=0A3D62)](https://krzyfok.github.io/Marketplace-backend/)
