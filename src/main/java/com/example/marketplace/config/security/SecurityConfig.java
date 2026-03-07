@@ -27,7 +27,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    @Profile("test")
+    @Profile("dev")
     public SecurityFilterChain testSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
