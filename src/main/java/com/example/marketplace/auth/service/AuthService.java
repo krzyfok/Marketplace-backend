@@ -38,7 +38,12 @@ public class AuthService {
         AuthUser authUser = authUserMapper.mapFromRegisterRequestDtotoAuthUser(request);
         authUserRepo.save(authUser);
 
-        User user = new User(authUser,request.getName(),request.getSurname());
+        User user = User.builder()
+                    .authUser(authUser)
+                    .firstName(request.getName())
+                    .lastName(request.getSurname())
+                    .build();
+
         userRepository.save(user);
 
         return new RegisterResponseDto(jwtProvider.generateToken(authUser));

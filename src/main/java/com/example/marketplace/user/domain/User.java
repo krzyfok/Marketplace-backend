@@ -2,9 +2,15 @@ package com.example.marketplace.user.domain;
 
 import com.example.marketplace.auth.domain.AuthUser;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
@@ -22,6 +28,7 @@ public class User {
     private AuthUser authUser;
 
 
+
     @Column(nullable = false, unique = false)
     private String firstName;
 
@@ -31,45 +38,6 @@ public class User {
     @Column(nullable = false, unique = false)
     private LocalDateTime createdAt;
 
-    public User() {
-    }
+    
 
-    public User(AuthUser authUser, String firstName, String lastName) {
-        this.authUser = authUser;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.createdAt  = LocalDateTime.now();
-    }
-
-    public AuthUser getAuthUser() {
-        return authUser;
-    }
-
-    public void setAuthUser(AuthUser authUser) {
-        this.authUser = authUser;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 }
