@@ -15,7 +15,7 @@ public class AuthUserMapper {
         this.passwordEncoder =passwordEncoder;
     }
 
-    public AuthUser mapFromRegisterRequestDtotoAuthUser(RegisterRequestDto request){
+    public AuthUser mapFromRegisterRequestDtoToAuthUser(RegisterRequestDto request){
 
         return AuthUser.builder()
                 .email(request.getEmail())

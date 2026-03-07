@@ -1,7 +1,6 @@
 package com.example.marketplace.auth.service;
 
 import com.example.marketplace.auth.domain.AuthUser;
-import com.example.marketplace.auth.domain.AuthUserRole;
 import com.example.marketplace.auth.dto.LoginRequestDto;
 import com.example.marketplace.auth.dto.LoginResponseDto;
 import com.example.marketplace.auth.dto.RegisterRequestDto;
@@ -35,7 +34,7 @@ public class AuthService {
 
     @Transactional
     public RegisterResponseDto register(RegisterRequestDto request) {
-        AuthUser authUser = authUserMapper.mapFromRegisterRequestDtotoAuthUser(request);
+        AuthUser authUser = authUserMapper.mapFromRegisterRequestDtoToAuthUser(request);
         authUserRepo.save(authUser);
 
         User user = User.builder()

@@ -2,9 +2,15 @@ package com.example.marketplace.Product.domain;
 
 import com.example.marketplace.Product.infrastructure.ProductRepository;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "products")
 public class Product {
@@ -29,51 +35,12 @@ public class Product {
     @Column
     private LocalDateTime createdAt;
 
-    public Product(String name, String model, ProductCategory category, Double price) {
-        this.name = name;
-        this.model = model;
-        this.category = category;
-        this.price = price;
-        this.createdAt = LocalDateTime.now();
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getModel() {
-        return model;
-    }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public ProductCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ProductCategory category) {
-        this.category = category;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 }

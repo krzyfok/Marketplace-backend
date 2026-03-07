@@ -2,13 +2,14 @@ package com.example.marketplace.auth.domain;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -42,4 +43,5 @@ public class AuthUser {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
+
 }

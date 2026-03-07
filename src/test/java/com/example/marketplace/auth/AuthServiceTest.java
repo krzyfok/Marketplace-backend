@@ -52,7 +52,7 @@ class AuthServiceTest {
         request.setName("John");
         request.setSurname("Doe");
 
-        when(authUserMapper.mapFromRegisterRequestDtotoAuthUser(any(RegisterRequestDto.class)))
+        when(authUserMapper.mapFromRegisterRequestDtoToAuthUser(any(RegisterRequestDto.class)))
                 .thenAnswer(invocation -> {
                     RegisterRequestDto req = invocation.getArgument(0);
                     return AuthUser.builder()

@@ -2,13 +2,13 @@ package com.example.marketplace.user.domain;
 
 import com.example.marketplace.auth.domain.AuthUser;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -38,6 +38,11 @@ public class User {
     @Column(nullable = false, unique = false)
     private LocalDateTime createdAt;
 
-    
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+
+
 
 }
