@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  mysql-db:
+    image: mysql:8.1
+    container_name: marketplace-mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: marketplace
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: appuser123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  spring-app:
+    build: .
+    container_name: marketplace-app
+    ports:
+      - "8443:8443"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/marketplace
+      SPRING_DATASOURCE_USERNAME: appuser
+      SPRING_DATASOURCE_PASSWORD: appuser123
+    depends_on:
+      - mysql-db
+
+volumes:
+  mysql-data:
