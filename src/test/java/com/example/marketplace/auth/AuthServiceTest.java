@@ -115,7 +115,7 @@ class AuthServiceTest {
         request.setPassword("secret");
 
         RuntimeException ex = assertThrows(RuntimeException.class, () -> authService.login(request));
-        assertEquals("User not found", ex.getMessage());
+        assertEquals("401 UNAUTHORIZED \"User not found\"", ex.getMessage());
     }
 
     @Test
@@ -134,6 +134,6 @@ class AuthServiceTest {
         request.setPassword("wrong");
 
         RuntimeException ex = assertThrows(RuntimeException.class, () -> authService.login(request));
-        assertEquals("Invalid password", ex.getMessage());
+        assertEquals("401 UNAUTHORIZED \"Invalid password\"", ex.getMessage());
     }
 }
