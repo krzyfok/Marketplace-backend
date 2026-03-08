@@ -5,10 +5,10 @@ services:
     image: mysql:8.1
     container_name: marketplace-mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: marketplace
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: appuser123
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
     ports:
       - "3306:3306"
     volumes:
@@ -20,9 +20,9 @@ services:
     ports:
       - "8443:8443"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/marketplace
-      SPRING_DATASOURCE_USERNAME: appuser
-      SPRING_DATASOURCE_PASSWORD: appuser123
+      SPRING_DATASOURCE_URL: ${DB_URL}
+      SPRING_DATASOURCE_USERNAME: ${DB_NAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASS}
     depends_on:
       - mysql-db
 
