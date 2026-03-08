@@ -1,5 +1,6 @@
-package com.example.marketplace.config.security;
+package com.example.marketplace.security.config;
 
+import com.example.marketplace.security.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -39,7 +40,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    @Profile("!test")
+    @Profile("!dev & !test")
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtFilter jwtAuthenticationFilter) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())

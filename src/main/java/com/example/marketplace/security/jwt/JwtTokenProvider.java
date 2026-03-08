@@ -1,4 +1,4 @@
-package com.example.marketplace.auth.infrastructure;
+package com.example.marketplace.security.jwt;
 
 import com.example.marketplace.auth.domain.AuthUser;
 import io.jsonwebtoken.*;
