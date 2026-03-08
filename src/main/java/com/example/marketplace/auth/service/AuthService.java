@@ -10,9 +10,11 @@ import com.example.marketplace.auth.mapper.AuthUserMapper;
 import com.example.marketplace.security.jwt.JwtTokenProvider;
 import com.example.marketplace.user.domain.User;
 import com.example.marketplace.user.infrastructure.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 
@@ -51,9 +53,9 @@ public class AuthService {
     @Transactional
     public LoginResponseDto login(LoginRequestDto request) {
         AuthUser user = authUserRepo.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid password");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password");
         }
         user.setLastloginAt(LocalDateTime.now());
         return  new LoginResponseDto(jwtProvider.generateToken(user));
