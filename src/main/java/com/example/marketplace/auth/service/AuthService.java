@@ -47,7 +47,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return new RegisterResponseDto(jwtProvider.generateToken(authUser));
+        return new RegisterResponseDto(jwtProvider.generateToken(authUser), request.getUsername());
 
     }
     @Transactional
@@ -58,7 +58,7 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password");
         }
         user.setLastloginAt(LocalDateTime.now());
-        return  new LoginResponseDto(jwtProvider.generateToken(user));
+        return  new LoginResponseDto(jwtProvider.generateToken(user),request.getUsername());
     }
 
 }

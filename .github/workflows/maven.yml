@@ -49,11 +49,11 @@ jobs:
         name: springboot-jar
         path: target/*.jar
 
-      # Prepare GitHub Pages
+
     - name: Setup Pages
       uses: actions/configure-pages@v4
 
-      # Upload docs folder as Pages artifact
+
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
