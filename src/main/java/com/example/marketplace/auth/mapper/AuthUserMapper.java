@@ -22,6 +22,10 @@ public class AuthUserMapper {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .username(request.getUsername())
                 .role(AuthUserRole.USER)
-                .build();}
+                .build();
+
+    }
+
+
 
 }

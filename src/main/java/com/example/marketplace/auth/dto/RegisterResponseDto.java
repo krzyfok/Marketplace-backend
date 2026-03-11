@@ -1,6 +1,12 @@
 package com.example.marketplace.auth.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class RegisterResponseDto {
+
     private String token;
     private String username;
 
@@ -9,7 +15,4 @@ public class RegisterResponseDto {
         this.username = username;
     }
 
-    public String getToken() {
-        return token;
-    }
 }
