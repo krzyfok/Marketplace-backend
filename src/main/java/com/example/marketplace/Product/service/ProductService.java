@@ -22,7 +22,6 @@ public class ProductService {
     @Transactional
     public NewProductResponseDto createProduct(NewProductRequestDto request)
     {
-
         Product newProduct = productMapper.mapFromNewProductRequestDtoToProduct(request);
         productRepo.save(newProduct);
         return new NewProductResponseDto(0);
