@@ -2,7 +2,12 @@ package com.example.marketplace.Product.dto;
 
 
 import com.example.marketplace.Product.domain.ProductCategory;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 public class NewProductRequestDto {
 
 
@@ -10,36 +15,6 @@ public class NewProductRequestDto {
     private String model;
     private ProductCategory category;
     private  Double price;
+    private int quantity;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public ProductCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ProductCategory category) {
-        this.category = category;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 }

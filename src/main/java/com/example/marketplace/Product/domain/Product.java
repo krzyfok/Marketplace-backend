@@ -35,6 +35,9 @@ public class Product {
     @Column
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    private int quantity;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

@@ -20,7 +20,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<NewProductResponseDto> create(@RequestBody NewProductRequestDto request)
+    public ResponseEntity<NewProductResponseDto> createProduct(@RequestBody NewProductRequestDto request)
     {
         try {
             return ResponseEntity.ok(productService.createProduct(request));

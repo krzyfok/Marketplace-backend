@@ -15,6 +15,7 @@ public class ProductMapper {
                 .model(request.getModel())
                 .category(request.getCategory())
                 .price(request.getPrice())
+                .quantity(request.getQuantity())
                 .build();
 
     }

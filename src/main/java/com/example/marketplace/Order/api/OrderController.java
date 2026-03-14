@@ -1,7 +1,12 @@
 package com.example.marketplace.Order.api;
 
 
+import com.example.marketplace.Order.dto.CreateOrderResponseDto;
 import com.example.marketplace.Order.service.OrderService;
+import com.example.marketplace.Product.dto.NewProductRequestDto;
+import com.example.marketplace.Product.dto.NewProductResponseDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +18,11 @@ public class OrderController {
 
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
+    }
+
+    public ResponseEntity<NewProductResponseDto> createOrder(@RequestBody NewProductRequestDto)
+    {
+
     }
 
 
