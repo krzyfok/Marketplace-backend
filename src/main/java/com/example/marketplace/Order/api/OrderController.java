@@ -1,6 +1,7 @@
 package com.example.marketplace.Order.api;
 
 
+import com.example.marketplace.Order.dto.CreateOrderRequestDto;
 import com.example.marketplace.Order.dto.CreateOrderResponseDto;
 import com.example.marketplace.Order.service.OrderService;
 import com.example.marketplace.Product.dto.NewProductRequestDto;
@@ -20,9 +21,9 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    public ResponseEntity<NewProductResponseDto> createOrder(@RequestBody NewProductRequestDto)
+    public ResponseEntity<CreateOrderResponseDto> createOrder(@RequestBody CreateOrderRequestDto request)
     {
-
+        return  ResponseEntity.ok(new CreateOrderResponseDto());
     }
 
 
