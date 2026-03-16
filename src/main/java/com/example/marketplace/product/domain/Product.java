@@ -1,6 +1,5 @@
-package com.example.marketplace.Product.domain;
+package com.example.marketplace.product.domain;
 
-import com.example.marketplace.Product.infrastructure.ProductRepository;
 import jakarta.persistence.*;
 import lombok.*;
 

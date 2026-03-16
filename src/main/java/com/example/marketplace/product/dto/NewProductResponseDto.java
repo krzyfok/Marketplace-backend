@@ -1,4 +1,4 @@
-package com.example.marketplace.Product.dto;
+package com.example.marketplace.product.dto;
 
 import lombok.Getter;
 import lombok.Setter;

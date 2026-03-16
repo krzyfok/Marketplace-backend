@@ -1,8 +1,8 @@
-package com.example.marketplace.Product.api;
+package com.example.marketplace.product.api;
 
-import com.example.marketplace.Product.dto.NewProductRequestDto;
-import com.example.marketplace.Product.dto.NewProductResponseDto;
-import com.example.marketplace.Product.service.ProductService;
+import com.example.marketplace.product.dto.NewProductRequestDto;
+import com.example.marketplace.product.dto.NewProductResponseDto;
+import com.example.marketplace.product.service.ProductService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

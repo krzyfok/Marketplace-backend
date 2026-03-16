@@ -1,10 +1,10 @@
-package com.example.marketplace.Product.service;
+package com.example.marketplace.product.service;
 
-import com.example.marketplace.Product.domain.Product;
-import com.example.marketplace.Product.dto.NewProductRequestDto;
-import com.example.marketplace.Product.dto.NewProductResponseDto;
-import com.example.marketplace.Product.infrastructure.ProductRepository;
-import com.example.marketplace.Product.mapper.ProductMapper;
+import com.example.marketplace.product.domain.Product;
+import com.example.marketplace.product.dto.NewProductRequestDto;
+import com.example.marketplace.product.dto.NewProductResponseDto;
+import com.example.marketplace.product.infrastructure.ProductRepository;
+import com.example.marketplace.product.mapper.ProductMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
@@ -22,7 +22,7 @@ public class ProductService {
     @Transactional
     public NewProductResponseDto createProduct(NewProductRequestDto request)
     {
-        Product newProduct = productMapper.mapFromNewProductRequestDtoToProduct(request);
+        Product newProduct = productMapper.mapToProduct(request);
         productRepo.save(newProduct);
         return new NewProductResponseDto(0);
     }

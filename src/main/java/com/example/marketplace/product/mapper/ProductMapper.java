@@ -1,14 +1,13 @@
-package com.example.marketplace.Product.mapper;
+package com.example.marketplace.product.mapper;
 
-import com.example.marketplace.Product.domain.Product;
-import com.example.marketplace.Product.dto.NewProductRequestDto;
-import com.example.marketplace.Product.dto.NewProductResponseDto;
+import com.example.marketplace.product.domain.Product;
+import com.example.marketplace.product.dto.NewProductRequestDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper {
 
-    public Product mapFromNewProductRequestDtoToProduct(NewProductRequestDto request){
+    public Product mapToProduct(NewProductRequestDto request){
 
         return Product.builder()
                 .name(request.getName())

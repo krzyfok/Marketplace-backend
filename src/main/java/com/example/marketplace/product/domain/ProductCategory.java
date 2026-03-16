@@ -1,4 +1,4 @@
-package com.example.marketplace.Product.domain;
+package com.example.marketplace.product.domain;
 
 public enum ProductCategory {
     ELECTRONICS("TYPE_ELECTRONICS");

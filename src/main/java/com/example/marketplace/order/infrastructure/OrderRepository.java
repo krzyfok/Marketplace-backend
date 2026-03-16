@@ -1,6 +1,6 @@
-package com.example.marketplace.Order.infrastructure;
+package com.example.marketplace.order.infrastructure;
 
-import com.example.marketplace.Order.domain.Order;
+import com.example.marketplace.order.domain.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {

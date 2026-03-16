@@ -1,7 +1,7 @@
-package com.example.marketplace.Product.dto;
+package com.example.marketplace.product.dto;
 
 
-import com.example.marketplace.Product.domain.ProductCategory;
+import com.example.marketplace.product.domain.ProductCategory;
 import lombok.Getter;
 import lombok.Setter;
 

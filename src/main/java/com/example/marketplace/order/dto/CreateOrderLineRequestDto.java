@@ -1,4 +1,4 @@
-package com.example.marketplace.Order.dto;
+package com.example.marketplace.order.dto;
 
 import lombok.*;
 

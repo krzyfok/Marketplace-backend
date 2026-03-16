@@ -1,4 +1,4 @@
-package com.example.marketplace.Order.domain;
+package com.example.marketplace.order.domain;
 
 
 import com.example.marketplace.user.domain.User;
@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Builder
 @NoArgsConstructor

@@ -1,11 +1,9 @@
-package com.example.marketplace.Order.api;
+package com.example.marketplace.order.api;
 
 
-import com.example.marketplace.Order.dto.CreateOrderRequestDto;
-import com.example.marketplace.Order.dto.CreateOrderResponseDto;
-import com.example.marketplace.Order.service.OrderService;
-import com.example.marketplace.Product.dto.NewProductRequestDto;
-import com.example.marketplace.Product.dto.NewProductResponseDto;
+import com.example.marketplace.order.dto.CreateOrderRequestDto;
+import com.example.marketplace.order.dto.CreateOrderResponseDto;
+import com.example.marketplace.order.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
