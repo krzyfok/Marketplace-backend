@@ -10,6 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "orderLines")
 public class OrderLine {
 
     @Id
