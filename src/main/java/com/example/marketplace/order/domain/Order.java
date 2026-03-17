@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Builder
 @NoArgsConstructor
@@ -21,7 +23,7 @@ public class Order {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private Long orderNumber;
+    private String orderNumber;
     @Column(nullable = false)
     private LocalDateTime orderDate;
 
@@ -40,7 +42,15 @@ public class Order {
 
     @PrePersist
     protected void onCreate() {
-        orderDate = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        orderDate = now;
+        orderNumber = generateOrderNumber(now);
+    }
+
+    private String generateOrderNumber(LocalDateTime now) {
+        String date = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String random = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+        return "ORD-" + date + "-" + random;
     }
 
 
