@@ -4,6 +4,7 @@ import com.example.marketplace.order.domain.Order;
 import com.example.marketplace.order.dto.CreateOrderLineRequestDto;
 import com.example.marketplace.order.dto.CreateOrderRequestDto;
 import com.example.marketplace.order.dto.CreateOrderResponseDto;
+import com.example.marketplace.order.dto.GetUserOrdersResponseDto;
 import com.example.marketplace.order.infrastructure.OrderRepository;
 import com.example.marketplace.order.domain.OrderLine;
 
@@ -11,6 +12,8 @@ import com.example.marketplace.order.mapper.OrderMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -42,6 +45,16 @@ public class OrderService {
         order.setValue(totalValue);
         orderRepository.save(order);
         return new CreateOrderResponseDto(order.getOrderNumber());
+    }
+
+
+    public GetUserOrdersResponseDto getUserOrder(Long userId){
+
+        List<Order> orders = orderRepository.findByUserId(userId);
+        List<String> orderNumbers = orders.stream().map(Order ::getOrderNumber).toList();
+
+        return new GetUserOrdersResponseDto(orderNumbers);
+
     }
 
 
