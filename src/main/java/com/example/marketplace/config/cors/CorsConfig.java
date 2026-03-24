@@ -20,6 +20,11 @@ public class CorsConfig {
                 registry.addMapping("/auth/register")
                         .allowedOrigins("http://localhost:5173")
                         .allowedMethods("POST");
+
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:5173")
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
             }
         };
     }
