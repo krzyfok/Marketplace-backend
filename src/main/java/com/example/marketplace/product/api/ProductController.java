@@ -1,14 +1,12 @@
 package com.example.marketplace.product.api;
 
+import com.example.marketplace.product.dto.GetProductsResponseDto;
 import com.example.marketplace.product.dto.NewProductRequestDto;
 import com.example.marketplace.product.dto.NewProductResponseDto;
 import com.example.marketplace.product.service.ProductService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
@@ -29,5 +27,13 @@ public class ProductController {
             return  ResponseEntity.badRequest().body(new NewProductResponseDto(1));
         }
     }
+
+    @GetMapping
+    public ResponseEntity<GetProductsResponseDto> getAllProducts()
+    {
+
+        return  ResponseEntity.ok(productService.getProducts());
+    }
+
 
 }

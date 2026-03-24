@@ -10,6 +10,7 @@ import com.example.marketplace.order.domain.OrderLine;
 
 import com.example.marketplace.order.mapper.OrderMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,6 +28,7 @@ public class OrderService {
         this.orderMapper = orderMapper;
     }
 
+    @Transactional
     public CreateOrderResponseDto createOrder(CreateOrderRequestDto request){
 
         Order order = orderMapper.mapToOrder(request);
@@ -48,6 +50,7 @@ public class OrderService {
     }
 
 
+    @Transactional
     public GetUserOrdersResponseDto getUserOrder(Long userId){
 
         List<Order> orders = orderRepository.findByUserId(userId);
