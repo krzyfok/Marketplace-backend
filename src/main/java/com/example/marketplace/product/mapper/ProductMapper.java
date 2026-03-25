@@ -26,6 +26,7 @@ public class ProductMapper {
                 .category(product.getCategory())
                 .model(product.getModel())
                 .price(product.getPrice())
+                .id(product.getId())
                 .build();
     }
 }
